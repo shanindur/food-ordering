@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_app/screens/LoginScreen.dart';
 import 'package:food_app/screens/SplashScreen.dart';
 
+import 'Helper/DBProvider.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

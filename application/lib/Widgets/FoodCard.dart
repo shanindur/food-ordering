@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:food_app/Helper/DBProvider.dart';
 import 'package:food_app/Model/CartModel.dart';
 import 'package:food_app/Model/FoodModel.dart';
+import 'package:food_app/Model/OrderModel.dart';
 import 'package:food_app/constants/colors.dart';
 import 'package:provider/provider.dart';
 
 class FoodCard extends StatefulWidget {
-  final Food food;
+  final FoodModel food;
   FoodCard(this.food);
 
   _FoodCardState createState() => _FoodCardState();
 }
 
 class _FoodCardState extends State<FoodCard> {
-  Food get food => widget.food;
+  FoodModel get food => widget.food;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +113,19 @@ class _FoodCardState extends State<FoodCard> {
     );
   }
 
-  addItemToCard() {
+  addItemToCard() async {
+    DBProvider foodDB = DBProvider();
+
+    final order = OrderModel(
+        id: 1,
+        foodId: 1,
+        foodType: "Breakfast",
+        createdAt: "2020/08/10",
+        status: 2
+    );
+
+    await foodDB.addOrder(order);
+
     final snackBar = SnackBar(
       backgroundColor: Colors.green,
       content: Text('Order placed successfully!'),

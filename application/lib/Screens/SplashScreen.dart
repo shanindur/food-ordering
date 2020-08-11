@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/Helper/DBProvider.dart';
 import 'package:food_app/Screens/LoginScreen.dart';
 import 'package:food_app/constants/colors.dart';
 

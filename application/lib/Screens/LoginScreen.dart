@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Animation/FadeAnimation.dart';
+import 'package:food_app/Helper/DBProvider.dart';
+import 'package:food_app/Model/UserModel.dart';
 import 'package:food_app/constants/colors.dart';
 import 'package:food_app/screens/HomeScreen.dart';
 
@@ -9,9 +11,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  DBProvider foodDB = DBProvider();
+  String username, password;
+
+  @override
+  void initState() {
+    username = "";
+    password = "";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
@@ -87,6 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   border: Border(bottom: BorderSide(color: Colors.grey[100]))
                               ),
                               child: TextField(
+                                onChanged: (String value){
+                                  setState(() {
+                                    username = value;
+                                  });
+                                },
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Email",
@@ -97,6 +116,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
+                                onChanged: (String value){
+                                  setState(() {
+                                    password = value;
+                                  });
+                                },
+                                obscureText: true,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Password",
@@ -140,12 +165,45 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _login(){
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {
-          return HomeScreen();
-        },
+  void _login() async {
+
+    if(password != '123' || password == "" || username == ""){
+
+     show('Invalid username or password!');
+
+    }else{
+
+      final user = UserModel(
+          id: 1,
+          email: username
+      );
+
+      await foodDB.addUser(user);
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeScreen();
+          },
+        ),
+      );
+    }
+
+  }
+
+  // taking message as the text
+  Future show(
+      String message, {
+        Duration duration: const Duration(seconds: 3),
+      }) async {
+    await new Future.delayed(new Duration(milliseconds: 100));
+    _scaffoldKey.currentState.showSnackBar(
+      new SnackBar(
+        backgroundColor: Colors.red,
+        content: new Text(
+          message,
+        ),
+        duration: duration,
       ),
     );
   }

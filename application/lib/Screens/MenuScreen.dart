@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/Helper/DBProvider.dart';
 import 'package:food_app/Model/FoodModel.dart';
+import 'package:food_app/Screens/LoginScreen.dart';
 import 'package:food_app/Widgets/FoodCard.dart';
 import 'package:food_app/constants/colors.dart';
 
@@ -11,6 +13,21 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   int value = 0;
+  String username = '';
+  DBProvider foodDB = DBProvider();
+
+  @override
+  void initState() {
+    _fetchUsers();
+    super.initState();
+  }
+
+  void _fetchUsers() async {
+    var users = await foodDB.fetchUsers();
+    setState(() {
+      username = users[0].email;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +47,14 @@ class _MenuScreenState extends State<MenuScreen> {
             Icons.fastfood,
             color: Colors.black,
           ),
+          actions: [
+            IconButton(
+              onPressed: (){
+                _logout();
+              },
+              icon: Icon(Icons.exit_to_app, color: Colors.black,),
+            )
+          ],
         ),
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -38,7 +63,7 @@ class _MenuScreenState extends State<MenuScreen> {
               Container(
                 margin: EdgeInsets.only(left: 8.0),
                 width: MediaQuery.of(context).size.width,
-                child: Text("Hi, shanindu.rajapaksha91@gmail.com",
+                child: Text("Hi, $username",
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey),),
               ),
@@ -96,4 +121,20 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
+  void _logout() async {
+
+    DBProvider foodDB = new DBProvider();
+    await foodDB.deleteUser(1);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return LoginScreen();
+        },
+      ),
+    );
+
+  }
 }
+
+

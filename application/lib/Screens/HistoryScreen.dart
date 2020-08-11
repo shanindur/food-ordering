@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/Helper/DBProvider.dart';
 
 class HistoryScreen extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+  DBProvider foodDB = DBProvider();
   DateTime selectedFromDate = DateTime.now();
   DateTime selectedToDate = DateTime.now();
 
@@ -28,6 +30,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
       });
     }
   }
+
+  @override
+  void initState() {
+    fetchOrders();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,4 +237,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
       ),
     );
   }
+  void fetchOrders() async {
+    var orders = await foodDB.fetchOrders();
+    print(orders);
+  }
 }
+
+

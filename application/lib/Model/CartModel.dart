@@ -35,7 +35,7 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeAllInList(Food food) {
+  void removeAllInList(FoodModel food) {
     cartItems.removeWhere((f) {
       return f.food.name == food.name;
     });
@@ -44,7 +44,7 @@ class Cart extends ChangeNotifier {
 }
 
 class CartModel {
-  Food food;
+  FoodModel food;
   int quantity;
 
   CartModel({this.food, this.quantity});

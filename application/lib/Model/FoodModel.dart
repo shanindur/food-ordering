@@ -1,15 +1,18 @@
-class Food {
+class FoodModel {
+  int id;
   String name;
   double price;
   double rate;
   int rateCount;
   String image;
   String foodType;
-  Food({this.name, this.price, this.image, this.rate, this.rateCount, this.foodType});
+
+  FoodModel({this.id, this.name, this.price, this.image, this.rate, this.rateCount, this.foodType});
+
+
 }
 
 List<String> foodTypes = [
-  'All',
   'Breakfast',
   'Lunch',
   'Dinner',
@@ -17,8 +20,9 @@ List<String> foodTypes = [
   'Dessert',
 ];
 
-List<Food> foods = [
-  Food(
+List<FoodModel> foods = [
+  FoodModel(
+    id: 1,
     name: 'Vegetable Poached Egg',
     price: 10,
     rate: 3.0,
@@ -26,7 +30,8 @@ List<Food> foods = [
     image: 'assets/images/plate1.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 2,
     name: 'Avocado Salad With Mayonoise Soy Sauce',
     price: 20,
     rate: 2,
@@ -34,7 +39,8 @@ List<Food> foods = [
     image: 'assets/images/plate2.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 3,
     name: 'Pancake With Orange Sauce',
     price: 30,
     rate: 3,
@@ -42,7 +48,8 @@ List<Food> foods = [
     image: 'assets/images/plate5.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 4,
     name: 'Vegetables Salad',
     price: 40,
     rate: 4,
@@ -50,7 +57,8 @@ List<Food> foods = [
     image: 'assets/images/plate6.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 5,
     name: 'Vegetable Poached Egg',
     price: 10,
     rate: 3.0,
@@ -58,7 +66,8 @@ List<Food> foods = [
     image: 'assets/images/plate1.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 6,
     name: 'Avocado Salad With Mayonoise Soy Sauce',
     price: 20,
     rate: 2,
@@ -66,7 +75,8 @@ List<Food> foods = [
     image: 'assets/images/plate2.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 7,
     name: 'Pancake With Orange Sauce',
     price: 30,
     rate: 3,
@@ -74,7 +84,8 @@ List<Food> foods = [
     image: 'assets/images/plate5.png',
     foodType: foodTypes[0],
   ),
-  Food(
+  FoodModel(
+    id: 8,
     name: 'Vegetables Salad',
     price: 40,
     rate: 4,
