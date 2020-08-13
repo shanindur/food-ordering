@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:food_app/Model/OrderModel.dart';
 import 'package:sqflite/sqflite.dart'; //sqflite package
 import 'package:path_provider/path_provider.dart'; //path_provider package
@@ -26,8 +27,10 @@ class DBProvider{
           await db.execute("""
           CREATE TABLE Orders(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          foodId TEXT,
-          foodType INTEGER,
+          foodId INTEGER,
+          foodType TEXT,
+          fooName TEXT,
+          imagePath TEXT,
           createdAt TEXT,
           status INTEGER)"""
           );
@@ -95,11 +98,13 @@ class DBProvider{
     final db = await init();
     final maps = await db.query("Orders"); //query all the rows in a table as an array of maps
 
-    return List.generate(maps.length, (i) { //create a list of memos
+    return List.generate(maps.length, (i) { //create a list of orders
       return OrderModel(
         id: maps[i]['id'],
         foodId: maps[i]['foodId'],
         foodType: maps[i]['foodType'],
+        foodName : maps[i]['fooName'],
+        imagePath: maps[i]['imagePath'],
         createdAt: maps[i]['createdAt'],
         status: maps[i]['status'],
 

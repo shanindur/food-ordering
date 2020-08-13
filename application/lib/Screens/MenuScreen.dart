@@ -107,7 +107,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget buildFoodList() {
     return Expanded(
       child: GridView.builder(
-        itemCount: foods.length,
+        itemCount: getItemCount(),
         physics: BouncingScrollPhysics(),
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -116,11 +116,43 @@ class _MenuScreenState extends State<MenuScreen> {
           crossAxisSpacing: 16,
         ),
         itemBuilder: (context, index) {
-          return FoodCard(foods[index]);
+          return FoodCard(getType()[index]);
         },
       ),
     );
   }
+
+  getType(){
+    if(value == 0){
+      return breakFastFoods;
+    }else if(value == 1){
+      return lunchFoods;
+    }else if(value == 2){
+     return dinnerFoods;
+    }else if(value == 3){
+      return snackFoods;
+    }else if(value == 4){
+      return dessertFoods;
+    }
+  }
+  getItemCount(){
+    if(value == 0){
+      return breakFastFoods.length;
+    }else if(value == 1){
+      return lunchFoods.length;
+    }
+    else if(value == 2){
+      return dinnerFoods.length;
+    }
+    else if(value == 3){
+      return snackFoods.length;
+    }
+    else if(value == 4){
+      return dessertFoods.length;
+    }
+  }
+
+
   void _logout() async {
 
     DBProvider foodDB = new DBProvider();

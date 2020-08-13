@@ -117,11 +117,12 @@ class _FoodCardState extends State<FoodCard> {
     DBProvider foodDB = DBProvider();
 
     final order = OrderModel(
-        id: 1,
-        foodId: 1,
-        foodType: "Breakfast",
-        createdAt: "2020/08/10",
-        status: 2
+        foodId: food.id,
+        foodType: food.foodType,
+        foodName: food.name,
+        imagePath: food.image,
+        createdAt: DateTime.now().toLocal().toString().split(' ')[0],
+        status: 1
     );
 
     await foodDB.addOrder(order);
@@ -132,7 +133,7 @@ class _FoodCardState extends State<FoodCard> {
       duration: Duration(milliseconds: 1000),
     );
     Scaffold.of(context).showSnackBar(snackBar);
-    CartModel cartModel = CartModel(food: food, quantity: 1);
-    Provider.of<Cart>(context).addItem(cartModel);
+//    CartModel cartModel = CartModel(food: food, quantity: 1);
+//    Provider.of<Cart>(context).addItem(cartModel);
   }
 }

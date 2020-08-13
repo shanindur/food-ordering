@@ -53,6 +53,23 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/breakfast/burger.png
+    - assets/images/breakfast/cereal.png
+    - assets/images/breakfast/rice.png
+    - assets/images/breakfast/sandwich.png
+    - assets/images/dessert/applepie.png
+    - assets/images/dessert/biscuit_pudding.png
+    - assets/images/dessert/cheese_cake.png
+    - assets/images/dessert/fruit_salad.png
+    - assets/images/dessert/lava_cake.png
+    - assets/images/snacks/biscuit.png
+    - assets/images/snacks/nuts.png
+    - assets/images/snacks/chips.png
+    - assets/images/snacks/salsa.png
+    - assets/images/snacks/samosa.png
+    - assets/images/dinner/biriyani.png
+    - assets/images/dinner/soup.png
+    - assets/images/dinner/pasta.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

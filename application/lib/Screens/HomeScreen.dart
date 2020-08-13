@@ -76,24 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildFoodList() {
-    return Expanded(
-      child: GridView.builder(
-        itemCount: foods.length,
-        physics: BouncingScrollPhysics(),
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 4 / 6,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 16,
-        ),
-        itemBuilder: (context, index) {
-          return FoodCard(foods[index]);
-        },
-      ),
-    );
-  }
-
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;

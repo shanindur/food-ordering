@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     username = "";
     password = "";
+    _fetchUsers();
     super.initState();
   }
 
@@ -163,6 +164,19 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         )
     );
+  }
+
+  void _fetchUsers() async {
+    var users = await foodDB.fetchUsers();
+    if(users.length > 0){
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeScreen();
+          },
+        ),
+      );
+    }
   }
 
   void _login() async {
